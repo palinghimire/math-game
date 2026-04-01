@@ -1,4 +1,5 @@
 #import
+import operator
 from random import randint
 
 #veriable
@@ -22,3 +23,6 @@ while True:
 
 
     #
+    opt = {
+        "+" 
+    }
