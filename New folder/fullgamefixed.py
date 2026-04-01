@@ -4,9 +4,16 @@ import operator
 #funchtions
 
 name = input("what is your name?:")
-while True:
 
-    question_amount = int(input(f"{name} how many questions whould you like?:"))
+#  This stops it from crashing if you type letters or press Enter.
+while True:
+    try:
+        question_amount = int(input(f"{name} how many questions whould you like?:"))
+        break # This breaks the loop only if a valid number is typed!
+    except ValueError:
+        print("Please enter a valid number.")
+
+while True:
 
     def yes_no(question):
 
@@ -53,9 +60,10 @@ import random
 
 # score and choose a random operator
 
-
-
 u = 0 
+# Set up history and score before the loop begins
+history = []
+score = 0
 
 # 2. Use a 'for' loop to repeat the questions
 for i in range(question_amount):
@@ -70,8 +78,13 @@ for i in range(question_amount):
     else:
         result = a * b
 
-    # 3. Ask the question (indented so it's inside the loop)
-    answer = float(input(f"Question {i+1}: What is {a} {op} {b}? "))
+    # FIXED 3: This loop prevents crashes if you leave the question answer blank!
+    while True:
+        try:
+            answer = int(input(f"Question {i+1}: What is {a} {op} {b}? "))
+            break # Valid number entered, move on
+        except ValueError:
+            print("Please enter a valid number.")
 
     if answer == result:
         u = u + 1
@@ -79,21 +92,17 @@ for i in range(question_amount):
     else:
         print(f"Wrong answer. The correct answer was {result}")
 
+    # FIX 2: Save the answer to history INSIDE the loop so it records every question
+    if answer == result:
+        score += 1
+        feedback = "Correct"
+    else:
+        feedback = f"Incorrect (Correct: {result})"
+
+    history.append(f"Q{i+1}: {a} {op} {b} = {answer} | {feedback}")
+
 # 4. Print the final score after the loop finishes
 print(f"Game Over! You got {u} out of {question_amount} right.")
-# 1. Add this BEFORE your loop starts
-history = []
-score = 0
-
-# 2. Inside your loop, after the user answers, add this:
-if answer == result:
-    score += 1
-    feedback = "Correct"
-else:
-    feedback = f"Incorrect (Correct: {result})"
-
-# This saves the result to your list
-history.append(f"Q{i+1}: {a} {op} {b} = {answer} | {feedback}")
 
 # 3. Paste this at the very END of your code (outside the loop)
 print("\n--- GAME HISTORY ---")
