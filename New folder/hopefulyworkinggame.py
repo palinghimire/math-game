@@ -78,7 +78,7 @@ for i in range(question_amount):
     else:
         result = a * b
 
-    # FIXED 3: This loop prevents crashes if you leave the question answer blank!
+    #  This loop prevents crashes if you leave the question answer blank!
     while True:
         try:
             answer = int(input(f"Question {i+1}: What is {a} {op} {b}? "))
@@ -92,7 +92,7 @@ for i in range(question_amount):
     else:
         print(f"Wrong answer. The correct answer was {result}")
 
-    # FIX 2: Save the answer to history INSIDE the loop so it records every question
+    # Save the answer to history INSIDE the loop so it records every question
     if answer == result:
         score += 1
         feedback = "Correct"
@@ -110,3 +110,11 @@ for line in history:
     print(line)
 print(f"\nFinal Score: {score}/{question_amount}")
 
+# Adding the 2 requested summary variables and the percentage
+rounds_won = u
+rounds_lost = question_amount - u
+percentage = (rounds_won / question_amount) * 100
+
+print(f"rounds won = {rounds_won}")
+print(f"rounds lost = {rounds_lost}")
+print(f"Percentage: {percentage:.1f}%")
